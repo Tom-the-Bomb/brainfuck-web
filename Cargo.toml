@@ -4,6 +4,9 @@ license = "MIT"
 version = "0.1.0"
 edition = "2021"
 
+[lib]
+crate-type = ["cdylib", "rlib"]
+
 [dependencies]
 wasm-bindgen = "0.2"
-brainfuck-exe = { git = "https://github.com/Tom-the-Bomb/brainfuck-rs" }
+brainfuck-exe = { git = "https://github.com/Tom-the-Bomb/brainfuck-rs", default-features = false }
