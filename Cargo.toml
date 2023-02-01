@@ -1,8 +1,24 @@
 [package]
 name = "brainfuck-web"
+authors = ["Tom-the-Bomb"]
+description = "An online brainfuck interpreter app powered by rust and WASM"
+repository = "https://github.com/Tom-the-Bomb/brainfuck-web"
 license = "MIT"
 version = "0.1.0"
 edition = "2021"
+keywords = [
+    "web",
+    "wasm",
+    "programming-language",
+    "language",
+    "interpreter",
+]
+categories = [
+    "wasm",
+    "web-programming",
+    "compilers",
+    "parser-implementations",
+]
 
 [lib]
 crate-type = ["cdylib", "rlib"]

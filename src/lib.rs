@@ -2,7 +2,11 @@ use std::io::Cursor;
 use wasm_bindgen::prelude::*;
 use brainfuck_exe::Brainfuck;
 
-
+/// binding function to execute the brainfuck code provided with applicable options
+///
+/// # Errors
+/// All errors are propogated from the execution within `Brainfuck`
+/// and if decoding the output bytes (UTF-8) fails
 #[wasm_bindgen]
 pub fn execute(
     code: &str,
@@ -31,7 +35,7 @@ pub fn execute(
     }
 
     if let Some(limit) = instructions_limit {
-        interp = interp.with_instructions_limit(limit)
+        interp = interp.with_instructions_limit(limit);
     }
 
     interp.execute()
