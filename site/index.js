@@ -1,14 +1,13 @@
-import init, { execute } from './pkg/brainfuck_web.js'
+import init, { execute } from './pkg/interpreter.js';
 
 function setupEditor() {
     let editor = ace.edit("editor");
     editor.setTheme("ace/theme/dracula");
-    editor.renderer.setScrollMargin(30);
     editor.setShowPrintMargin(false);
+    editor.renderer.setScrollMargin(30);
     editor.session.setOptions({
         tabSize: 4,
         useSoftTabs: true,
-        showLineNumbers: true,
     });
 
     editor.setBehavioursEnabled(true);
