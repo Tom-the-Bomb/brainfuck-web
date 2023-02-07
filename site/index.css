@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200&display=swap');
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    min-height: 100vh;
+    /*background-color: rgb(70, 65, 80);*/
+    background-image: linear-gradient(red, blue)
+}
+
+main {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    row-gap: 4em;
+}
+
+#editor {
+    width: 60%;
+    height: 50em;
+    border-radius: 0.75em;
+    font-family: 'JetBrains Mono', 'monospace';
+    font-size: 14px;
+}
+
+#output {
+    border-radius: 0.75em;
+    background-color: black;
+    width: 60%;
+    min-height: 20em;
+}

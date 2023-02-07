@@ -5,15 +5,17 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Brainfuck Online</title>
+
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.5.3/ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="index.js" type="module" defer></script>
     </head>
     <body>
-        <script type="module">
-            import init, { execute } from './pkg/brainfuck_web.js'
-
-            await init();
-
-            console.log(execute("-."));
-        </script>
-        AAA
+        <header><nav>Brainfuck web</nav></header>
+        <main>
+            <div id="editor" class="language-brainfuck">Enter code here</div>
+            <div id="output"></div>
+        </main>
+        <footer>Made by Tom-the-Bomb 2023</footer>
     </body>
 </html>
