@@ -16,9 +16,28 @@ function setupEditor() {
     return editor;
 }
 
+function handler(editor, event) {
+    event.preventDefault();
+    
+    const code = editor.getValue();
+    let result = execute(code);
+
+    const outputEl = document.getElementById("output-content");
+    if (outputEl) {
+        outputEl.innerHTML = result;
+    }
+}
+
 async function main() {
     await init();
-    setupEditor();
+    let editor = setupEditor();
+
+    const form = document.getElementById("input");
+    if (form) {
+        form.addEventListener('submit', (event) => {
+            handler(editor, event);
+        });
+    }
 }
 
 await main();
