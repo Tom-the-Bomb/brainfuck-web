@@ -1,4 +1,4 @@
-import init, { execute } from './pkg/interpreter.js';
+import init, { execute } from './pkg/brainfuck_web.js';
 
 function setupEditor() {
     let editor = ace.edit("editor");

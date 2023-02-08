@@ -11,10 +11,21 @@
         <script src="index.js" type="module"></script>
     </head>
     <body>
-        <header><nav>Brainfuck web</nav></header>
+        <header>
+            <nav>
+                <a href="#">Brainfuck web</a>
+            </nav>
+        </header>
         <main>
-            <div id="editor">Enter code here</div>
-            <div id="output"></div>
+            <div id="input">
+                <div id="editor">Enter code here</div>
+                <div id="buttons">
+                    <button id="submit" type="button">Run</button>
+                </div>
+            </div>
+            <div id="output">
+                <div id="output-header">Output</div>
+            </div>
         </main>
         <footer>Made by Tom-the-Bomb 2023</footer>
     </body>
