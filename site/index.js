@@ -16,11 +16,26 @@ function setupEditor() {
     return editor;
 }
 
+function parseVal(elem) {
+    const val = elem?.value;
+    return [null, ''].includes(val)
+        ? null
+        : Number(val);
+}
+
 function handler(editor, event) {
     event.preventDefault();
-    
+
     const code = editor.getValue();
-    let result = execute(code);
+    const [input, maxCellValue, memorySize, instLimit] = [
+        document.getElementById("input-stream")?.value,
+        parseVal(document.getElementById("max-cell-val")),
+        parseVal(document.getElementById("mem-size")),
+        parseVal(document.getElementById("inst-lim")),
+    ];
+    const result = execute(
+        code, input, maxCellValue, memorySize, instLimit,
+    );
 
     const outputEl = document.getElementById("output-content");
     if (outputEl) {
