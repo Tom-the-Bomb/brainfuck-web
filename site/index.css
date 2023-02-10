@@ -2,8 +2,19 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400&display=swap');
 
+@font-face {
+    font-family: 'unicode';
+    src: url('./fonts/unifont-15.0.01.woff2');
+    src: url('./fonts/unifont-15.0.01.woff') format('woff'),
+         url('./fonts/unifont-15.0.01.ttf') format('truetype')
+         url('./fonts/unifont-15.0.01.otf') format('opentype')
+         url('./fonts/unifont-15.0.01.eot') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 :root {
-    --code-font: 'JetBrains Mono', 'monospace';
+    --code-font: 'JetBrains Mono', 'monospace', 'unicode';
     --main-font: 'VT323', 'monospace';
     --text-font: 'Ubuntu', 'sans-serif';
 
@@ -16,6 +27,9 @@
     --footer-color: rgb(22, 20, 30);
     --input-color: rgb(81, 75, 103);
     --btn-green: rgb(42, 156, 68);
+
+    --output-scrollbar: rgb(55, 55, 65);
+    --output-scrollbar-hv: rgb(73, 73, 85);
 }
 
 a {
@@ -47,7 +61,7 @@ nav {
     text-align: center;
 }
 
-footer {
+#footer {
     padding: 1em;
     margin-top: 5em;
     color: var(--text-color);
@@ -65,10 +79,6 @@ main {
     flex-direction: column;
     flex-wrap: wrap;
     row-gap: 2em;
-}
-
-.btn-icon {
-    width: 2em;
 }
 
 #input {
@@ -142,6 +152,32 @@ main {
 }
 
 #output #output-content {
+    resize: none;
+    width: 100%;
+    border: none;
+    color: inherit;
+    min-height: inherit;
     white-space: pre;
-    filter: brightness(80%);
+    background-color: var(--output-color);
+}
+
+#output-content::-webkit-scrollbar {
+    width: 0.8em;
+}
+
+#output-content::-webkit-scrollbar-thumb {
+    background-color: var(--output-scrollbar);
+    border-radius: 0.5em;
+}
+
+#output-content::-webkit-scrollbar-thumb:hover {
+    background-color: var(--output-scrollbar-hv);
+}
+
+#output-content::-webkit-scrollbar-track {
+    background: none;
+}
+
+#output #output-content:focus {
+    outline: none;
 }
