@@ -33,13 +33,27 @@ function handler(editor, event) {
         parseVal(document.getElementById("mem-size")),
         parseVal(document.getElementById("inst-lim")),
     ];
-    const result = execute(
-        code, input, maxCellValue, memorySize, instLimit,
-    );
+
+    let output;
+    let instructions;
+    try {
+        let result = execute(
+            code, input, maxCellValue, memorySize, instLimit,
+        );
+        console.log(result.output);
+        [output, instructions] = [result.output, result.instructions];
+    } catch (err) {
+        [output, instructions] = [String(err), instLimit];
+    }
 
     const outputEl = document.getElementById("output-content");
     if (outputEl) {
-        outputEl.innerHTML = result;
+        outputEl.innerHTML = output;
+    }
+
+    const instCounter = document.getElementById("instructions-val");
+    if (instCounter) {
+        instCounter.innerHTML = instructions;
     }
 }
 

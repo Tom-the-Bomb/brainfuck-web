@@ -23,7 +23,10 @@
             <form id="input">
                 <div id="editor">Enter code here</div>
                 <div id="options">
-                    <input id="input-stream" class="form-control" placeholder="Input chars" type="text">
+                    <input
+                        id="input-stream" class="form-control"
+                        placeholder="Input chars" type="text"
+                    >
                     <input id="max-cell-val" class="form-control" placeholder="Max cell value" type="number">
                     <input id="mem-size" class="form-control" placeholder="Memory array size" type="number">
                     <input id="inst-lim" class="form-control" placeholder="Instructions limit" type="number">
@@ -31,7 +34,12 @@
                 </div>
             </form>
             <div id="output">
-                <div id="output-header"><b>Output</b></div>
+                <div id="output-header">
+                    <b>Output</b>
+                    <span id="instructions-count">
+                        [Instructions: <code id="instructions-val">0</code>]
+                    </span>
+                </div>
                 <textarea
                     id="output-content"
                     readonly=""
@@ -42,6 +50,8 @@
                 </textarea>
             </div>
         </main>
-        <footer id="footer" class="card-footer">Made by Tom-the-Bomb 2023</footer>
+        <footer id="footer" class="card-footer">
+            Made by Tom-the-Bomb 2023
+        </footer>
     </body>
 </html>

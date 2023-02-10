@@ -2,6 +2,29 @@ use std::io::Cursor;
 use wasm_bindgen::prelude::*;
 use brainfuck_exe::Brainfuck;
 
+#[wasm_bindgen]
+#[derive(Debug, Clone)]
+pub struct Output {
+    output: String,
+    instructions: usize,
+}
+
+#[wasm_bindgen]
+impl Output {
+    #[must_use]
+    #[wasm_bindgen(getter)]
+    pub fn output(&self) -> String {
+        self.output.clone()
+    }
+
+    #[must_use]
+    #[wasm_bindgen(getter)]
+    #[allow(clippy::missing_const_for_fn)]
+    pub fn instructions(&self) -> usize {
+        self.instructions
+    }
+}
+
 /// binding function to execute the brainfuck code provided with applicable options
 ///
 /// # Errors
@@ -14,7 +37,7 @@ pub fn execute(
     max_cell_value: Option<u32>,
     memory_size: Option<usize>,
     instructions_limit: Option<usize>,
-) -> Result<JsValue, JsError> {
+) -> Result<Output, JsError> {
     let buffer: Vec<u8> = Vec::new();
     let mut output = Cursor::new(buffer);
     let mut interp = Brainfuck::new(code)
@@ -42,11 +65,14 @@ pub fn execute(
         .map_err(|err|
             JsError::new(format!("{err}").as_str())
         )?;
+    let instructions = interp.instructions_count();
 
-    let output = String::from_utf8(output.get_ref().clone())
+    let output = String::from_utf8(output.into_inner())
         .map_err(|err|
             JsError::new(format!("Something went wrong when decoding the output:\n{err}").as_str())
         )?;
 
-    Ok(output.into())
+    Ok(Output {
+        output, instructions,
+    })
 }

@@ -141,6 +141,11 @@ main {
     margin-bottom: 1em;
 }
 
+#output-header #instructions-count {
+    font-size: 0.75em;
+    filter: brightness(90%);
+}
+
 #output {
     padding: 1.5em;
     border-radius: 0.75em;
