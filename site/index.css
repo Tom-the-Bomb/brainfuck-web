@@ -18,6 +18,9 @@
     --main-font: 'VT323', 'monospace';
     --text-font: 'Ubuntu', 'sans-serif';
 
+    --bg-gradient: linear-gradient(rgb(78, 88, 115), rgb(44, 44, 52));
+    --bg-color: rgb(78, 88, 115);
+
     --title-color: rgb(30, 24, 35);
     --text-color: rgb(248, 248, 242);
     --placeholder-color: rgb(128, 125, 125);
@@ -49,8 +52,8 @@ body {
     flex-direction: column;
     min-height: 100vh;
     background:
-        linear-gradient(rgb(78, 88, 115), rgb(44, 44, 52)),
-        rgb(78, 88, 115);
+        var(--bg-gradient),
+        var(--bg-color);
 }
 
 nav {
@@ -143,7 +146,7 @@ main {
 
 #output-header #instructions-count {
     font-size: 0.75em;
-    filter: brightness(90%);
+    filter: brightness(85%);
 }
 
 #output {
