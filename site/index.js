@@ -1,4 +1,4 @@
-import init, { execute } from './pkg/brainfuck_web.js';
+import init, { execute } from "./pkg/brainfuck_web.js";
 
 function setupEditor() {
     let editor = ace.edit("editor");
@@ -18,7 +18,7 @@ function setupEditor() {
 
 function parseVal(elem) {
     const val = elem?.value;
-    return [null, ''].includes(val)
+    return [null, ""].includes(val)
         ? null
         : Number(val);
 }
@@ -40,7 +40,6 @@ function handler(editor, event) {
         let result = execute(
             code, input, maxCellValue, memorySize, instLimit,
         );
-        console.log(result.output);
         [output, instructions] = [result.output, result.instructions];
     } catch (err) {
         [output, instructions] = [String(err), instLimit];
@@ -57,13 +56,25 @@ function handler(editor, event) {
     }
 }
 
+function enableTooltips() {
+    const tooltipTriggerList = [].slice.call(
+        document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    );
+    tooltipTriggerList.map(
+        (tooltipTriggerEl) => {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        }
+    );
+}
+
 async function main() {
     await init();
+    enableTooltips();
     let editor = setupEditor();
 
     const form = document.getElementById("input");
     if (form) {
-        form.addEventListener('submit', (event) => {
+        form.addEventListener("submit", (event) => {
             handler(editor, event);
         });
     }

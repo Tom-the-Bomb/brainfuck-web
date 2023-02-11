@@ -5,6 +5,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Brainfuck Online</title>
+        <meta name="description" content="Execute brainfuck code in the web">
+        <meta property="og:image" content="https://raw.githubusercontent.com/Tom-the-Bomb/brainfuck-web/master/site/assets/brain.svg">
+        <link rel="icon" href="./assets/brain.svg" type="image/x-icon">
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -17,6 +20,7 @@
         <header>
             <nav>
                 <a href="#">Brainfuck web</a>
+                <span id="icon">[+.]</span>
             </nav>
         </header>
         <main>
@@ -30,6 +34,16 @@
                     <input id="max-cell-val" class="form-control" placeholder="Max cell value" type="number">
                     <input id="mem-size" class="form-control" placeholder="Memory array size" type="number">
                     <input id="inst-lim" class="form-control" placeholder="Instructions limit" type="number">
+                    <button
+                        type="button"
+                        id="reload-btn"
+                        class="small-btns btn"
+                        title="reload"
+                        data-bs-toggle="tooltip"
+                        onclick="window.location.reload()"
+                    >
+                        <img class="btn-icon" src="./assets/reload.svg" alt="reload">
+                    </button>
                     <button class="btn btn-success" id="submit" type="submit">Run</button>
                 </div>
             </form>
@@ -40,14 +54,7 @@
                         [Instructions: <code id="instructions-val">0</code>]
                     </span>
                 </div>
-                <textarea
-                    id="output-content"
-                    readonly=""
-                    spellcheck="false"
-                    autocapitalize="none"
-                    autocorrect="off"
-                    placeholder="">
-                </textarea>
+                <p id="output-content"></p>
             </div>
         </main>
         <footer id="footer" class="card-footer">

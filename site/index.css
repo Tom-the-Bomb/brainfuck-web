@@ -18,10 +18,16 @@
     --main-font: 'VT323', 'monospace';
     --text-font: 'Ubuntu', 'sans-serif';
 
-    --bg-gradient: linear-gradient(rgb(78, 88, 115), rgb(44, 44, 52));
-    --bg-color: rgb(78, 88, 115);
+    --bg-gradient: linear-gradient(190deg, rgb(82, 96, 133), rgb(29, 29, 45));
+    --bg-color: rgb(82, 96, 133);
 
+    --title-shadow: rgb(118, 116, 145) 4px 4px 10px;
+    --title-shadow-hv: rgb(118, 116, 145) 6px 6px 10px;
+
+    --icon-color: rgb(47, 43, 71);
+    --icon-text-color: rgb(153, 155, 190);
     --title-color: rgb(30, 24, 35);
+    --title-color-hv: rgb(41, 41, 87);
     --text-color: rgb(248, 248, 242);
     --placeholder-color: rgb(128, 125, 125);
 
@@ -29,10 +35,11 @@
     --output-color: rgb(28, 24, 31);
     --footer-color: rgb(22, 20, 30);
     --input-color: rgb(81, 75, 103);
-    --btn-green: rgb(42, 156, 68);
+    --reload-btn-color: rgb(29, 30, 38);
+    --reload-btn-color-hv: rgb(22, 23, 28);
 
-    --output-scrollbar: rgb(55, 55, 65);
-    --output-scrollbar-hv: rgb(73, 73, 85);
+    --scrollbar-main: rgb(61, 56, 84);
+    --scrollbar-hv: rgb(69, 63, 93);
 }
 
 a {
@@ -43,7 +50,6 @@ a {
 
 a:hover {
     color: inherit;
-    filter: brightness(10%);
 }
 
 body {
@@ -57,11 +63,17 @@ body {
 }
 
 nav {
+    text-shadow: var(--title-shadow);
     margin: 0.5em;
     font-size: 5em;
     font-family: var(--main-font);
     color: var(--title-color);
     text-align: center;
+}
+
+nav a:hover {
+    text-shadow: var(--title-shadow-hv);
+    color: var(--title-color-hv);
 }
 
 #footer {
@@ -82,6 +94,28 @@ main {
     flex-direction: column;
     flex-wrap: wrap;
     row-gap: 2em;
+}
+
+.btn-icon {
+    width: 2em;
+}
+
+#icon {
+    display: inline-block;
+    color: var(--icon-text-color);
+    border-radius: 50%;
+    padding: 0.25em;
+    text-shadow: var(--title-shadow);
+    box-shadow: var(--title-shadow);
+    font-size: 55%;
+    transition: 0.3s ease;
+    background: var(--icon-color);
+    transform: translateY(-1rem);
+}
+
+#icon:hover {
+    text-shadow: var(--title-shadow-hv);
+    box-shadow: var(--title-shadow-hv);
 }
 
 #input {
@@ -133,6 +167,14 @@ main {
     padding: 0.75em;
 }
 
+#options #reload-btn {
+    background-color: var(--reload-btn-color);
+}
+
+#options #reload-btn:hover {
+    background-color: var(--reload-btn-color-hv);
+}
+
 #options #submit {
     justify-self: flex-end;
     padding-left: 1.5em;
@@ -153,7 +195,7 @@ main {
     padding: 1.5em;
     border-radius: 0.75em;
     background-color: var(--output-color);
-    min-width: 60%;
+    width: 60%;
     min-height: 20em;
     color: var(--text-color);
     font-family: var(--code-font);
@@ -166,6 +208,7 @@ main {
     color: inherit;
     min-height: inherit;
     white-space: pre;
+    overflow-x: scroll;
     background-color: var(--output-color);
 }
 
@@ -173,16 +216,23 @@ main {
     width: 0.8em;
 }
 
-#output-content::-webkit-scrollbar-thumb {
-    background-color: var(--output-scrollbar);
+.ace_scrollbar::-webkit-scrollbar {
+    width: 0.9em;
+}
+
+#output-content::-webkit-scrollbar-thumb,
+.ace_scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-main);
     border-radius: 0.5em;
 }
 
-#output-content::-webkit-scrollbar-thumb:hover {
-    background-color: var(--output-scrollbar-hv);
+#output-content::-webkit-scrollbar-thumb:hover,
+.ace_scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-hv);
 }
 
-#output-content::-webkit-scrollbar-track {
+#output-content::-webkit-scrollbar-track,
+.ace_scrollbar::-webkit-scrollbar-track {
     background: none;
 }
 
