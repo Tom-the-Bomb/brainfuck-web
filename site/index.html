@@ -37,12 +37,12 @@
                     <button
                         type="button"
                         id="reload-btn"
-                        class="small-btns btn"
+                        class="btn"
                         title="reload"
                         data-bs-toggle="tooltip"
                         onclick="window.location.reload()"
                     >
-                        <img class="btn-icon" src="./assets/reload.svg" alt="reload">
+                        <img src="./assets/reload.svg" alt="reload">
                     </button>
                     <button class="btn btn-success" id="submit" type="submit">Run</button>
                 </div>
@@ -51,8 +51,17 @@
                 <div id="output-header">
                     <b>Output</b>
                     <span id="instructions-count">
-                        [Instructions: <code id="instructions-val">0</code>]
+                        [Instructions:&nbsp;<code id="instructions-val">0</code>]
                     </span>
+                    <button
+                        type="button"
+                        id="view-cells"
+                        class="btn btn-dark"
+                        title="details"
+                        data-bs-toggle="tooltip"
+                    >
+                        <img src="./assets/more.svg" alt="details">
+                    </button>
                 </div>
                 <p id="output-content"></p>
             </div>

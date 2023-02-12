@@ -1,12 +1,15 @@
 use std::io::Cursor;
 use wasm_bindgen::prelude::*;
-use brainfuck_exe::Brainfuck;
+use brainfuck_exe::{Brainfuck, ExecutionInfo};
 
 #[wasm_bindgen]
 #[derive(Debug, Clone)]
 pub struct Output {
     output: String,
     instructions: usize,
+    cells: Vec<u32>,
+    code_len: usize,
+    pointer: usize,
 }
 
 #[wasm_bindgen]
@@ -22,6 +25,24 @@ impl Output {
     #[allow(clippy::missing_const_for_fn)]
     pub fn instructions(&self) -> usize {
         self.instructions
+    }
+
+    #[must_use]
+    #[wasm_bindgen(getter)]
+    pub fn cells(&self) -> Vec<u32> {
+        self.cells.clone()
+    }
+
+    #[must_use]
+    #[wasm_bindgen(getter)]
+    pub fn code_len(&self) -> usize {
+        self.code_len
+    }
+
+    #[must_use]
+    #[wasm_bindgen(getter)]
+    pub fn pointer(&self) -> usize {
+        self.pointer
     }
 }
 
@@ -61,7 +82,9 @@ pub fn execute(
         interp = interp.with_instructions_limit(limit);
     }
 
-    interp.execute()
+    let ExecutionInfo {
+        cells, pointer, code_len, ..
+    } = interp.execute()
         .map_err(|err|
             JsError::new(format!("{err}").as_str())
         )?;
@@ -73,6 +96,10 @@ pub fn execute(
         )?;
 
     Ok(Output {
-        output, instructions,
+        output,
+        cells,
+        pointer,
+        code_len,
+        instructions,
     })
 }

@@ -4,8 +4,8 @@ version = 3
 
 [[package]]
 name = "brainfuck-exe"
-version = "0.1.8"
-source = "git+https://github.com/Tom-the-Bomb/brainfuck-rs#6ca280c3c845448aa1990591f1ebf004910fdc74"
+version = "0.2.0"
+source = "git+https://github.com/Tom-the-Bomb/brainfuck-rs#4bcbe97710337a92bbd94ec73c24bda826df13d1"
 
 [[package]]
 name = "brainfuck-web"

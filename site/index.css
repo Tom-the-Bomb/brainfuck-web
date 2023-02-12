@@ -96,10 +96,6 @@ main {
     row-gap: 2em;
 }
 
-.btn-icon {
-    width: 2em;
-}
-
 #icon {
     display: inline-block;
     color: var(--icon-text-color);
@@ -171,24 +167,45 @@ main {
     background-color: var(--reload-btn-color);
 }
 
+#options #reload-btn img {
+    width: 2em;
+}
+
 #options #reload-btn:hover {
     background-color: var(--reload-btn-color-hv);
 }
 
 #options #submit {
-    justify-self: flex-end;
     padding-left: 1.5em;
     padding-right: 1.5em;
 }
 
 #output-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.6em;
     font-size: 20px;
     margin-bottom: 1em;
+}
+
+#output-header > * {
+    display: flex;
+    align-items: center;
 }
 
 #output-header #instructions-count {
     font-size: 0.75em;
     filter: brightness(85%);
+}
+
+#output-header #view-cells {
+    margin-left: auto;
+    padding: 0.5em;
+}
+
+#output-header #view-cells img {
+    width: 1.7em;
 }
 
 #output {
