@@ -2,6 +2,8 @@ use std::io::Cursor;
 use wasm_bindgen::prelude::*;
 use brainfuck_exe::{Brainfuck, ExecutionInfo};
 
+/// output struct returned by the `execute` function
+/// providing relevant information for the execution result
 #[wasm_bindgen]
 #[derive(Debug, Clone)]
 pub struct Output {

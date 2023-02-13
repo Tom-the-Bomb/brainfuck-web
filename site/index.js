@@ -34,10 +34,11 @@ function handler(editor, event) {
         parseVal(document.getElementById("inst-lim")),
     ];
 
+    let result;
     let output;
     let instructions;
     try {
-        let result = execute(
+        result = execute(
             code, input, maxCellValue, memorySize, instLimit,
         );
         [output, instructions] = [result.output, result.instructions];
@@ -54,6 +55,18 @@ function handler(editor, event) {
     if (instCounter) {
         instCounter.innerHTML = instructions;
     }
+
+    const modalBody = document.getElementById("modal-body");
+    if (modalBody) {
+        modalBody.innerHTML = `
+            <div id="cells">
+                <div>Cells</div>
+                <pre><code>[${result.cells.join(', ')}]</code></pre>
+            </div>
+            <span>Pointer:&nbsp;&nbsp;<code>${result.pointer}</code></span>
+            <span>Code-length:&nbsp;&nbsp;<code>${result.code_len}</code></span>
+            `;
+    }
 }
 
 function enableTooltips() {
@@ -62,9 +75,14 @@ function enableTooltips() {
     );
     tooltipTriggerList.map(
         (tooltipTriggerEl) => {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
+            return new bootstrap.Tooltip(tooltipTriggerEl);
         }
     );
+
+    const details = document.getElementById("view-cells");
+    if (details) {
+        new bootstrap.Tooltip(details);
+    }
 }
 
 async function main() {

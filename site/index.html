@@ -58,7 +58,8 @@
                         id="view-cells"
                         class="btn btn-dark"
                         title="details"
-                        data-bs-toggle="tooltip"
+                        data-bs-toggle="modal"
+                        data-bs-target="#details-modal"
                     >
                         <img src="./assets/more.svg" alt="details">
                     </button>
@@ -69,5 +70,21 @@
         <footer id="footer" class="card-footer">
             Made by Tom-the-Bomb 2023
         </footer>
+
+        <div class="modal fade" id="details-modal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="md-section modal-header">
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div id="modal-body" class="md-section modal-body">
+                        Run the program first!
+                    </div>
+                    <div class="md-section modal-footer">
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
