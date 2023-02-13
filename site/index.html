@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
         <title>Brainfuck Online</title>
         <meta name="description" content="Execute brainfuck code in the web">
         <meta property="og:image" content="https://raw.githubusercontent.com/Tom-the-Bomb/brainfuck-web/master/site/assets/brain.svg">
@@ -27,13 +28,32 @@
             <form id="input">
                 <div id="editor">Enter code here</div>
                 <div id="options">
-                    <input
-                        id="input-stream" class="form-control"
-                        placeholder="Input chars" type="text"
+                    <input id="input-stream"
+                        class="form-control"
+                        placeholder="Input chars"
+                        type="text"
+                        spellcheck="false"
+                        autocorrect="false"
+                        autocapitalize="false"
                     >
-                    <input id="max-cell-val" class="form-control" placeholder="Max cell value" type="number">
-                    <input id="mem-size" class="form-control" placeholder="Memory array size" type="number">
-                    <input id="inst-lim" class="form-control" placeholder="Instructions limit" type="number">
+                    <input id="max-cell-val"
+                        class="form-control"
+                        placeholder="Max cell value (default: uint32::max)"
+                        type="number"
+                        min="0"
+                    >
+                    <input id="mem-size"
+                        class="form-control"
+                        placeholder="Memory array size (default: ∞)"
+                        type="number"
+                        min="0"
+                    >
+                    <input id="inst-lim"
+                        class="form-control"
+                        placeholder="Instructions limit (default: ∞)"
+                        type="number"
+                        min="0"
+                    >
                     <button
                         type="button"
                         id="reload-btn"
