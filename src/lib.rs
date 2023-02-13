@@ -8,13 +8,14 @@ use brainfuck_exe::{Brainfuck, ExecutionInfo};
 #[derive(Debug, Clone)]
 pub struct Output {
     output: String,
-    instructions: usize,
     cells: Vec<u32>,
-    code_len: usize,
     pointer: usize,
+    code_len: usize,
+    instructions: usize,
 }
 
 #[wasm_bindgen]
+#[allow(clippy::missing_const_for_fn)]
 impl Output {
     #[must_use]
     #[wasm_bindgen(getter)]
@@ -24,7 +25,6 @@ impl Output {
 
     #[must_use]
     #[wasm_bindgen(getter)]
-    #[allow(clippy::missing_const_for_fn)]
     pub fn instructions(&self) -> usize {
         self.instructions
     }
