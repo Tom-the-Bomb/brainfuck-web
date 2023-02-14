@@ -198,7 +198,7 @@ main {
     align-items: center;
 }
 
-#output-header #instructions-count {
+#output-header .information {
     font-size: 0.75em;
     filter: brightness(85%);
 }
