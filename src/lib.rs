@@ -2,6 +2,10 @@ use std::io::Cursor;
 use wasm_bindgen::prelude::*;
 use brainfuck_exe::{Brainfuck, ExecutionInfo};
 
+#[cfg(feature = "wee_alloc")]
+#[global_allocator]
+static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
+
 /// output struct returned by the `execute` function
 /// providing relevant information for the execution result
 #[wasm_bindgen]
@@ -9,6 +13,7 @@ use brainfuck_exe::{Brainfuck, ExecutionInfo};
 pub struct Output {
     output: String,
     cells: Vec<u32>,
+    mem_size: usize,
     pointer: usize,
     code_len: usize,
     instructions: usize,
@@ -33,6 +38,12 @@ impl Output {
     #[wasm_bindgen(getter)]
     pub fn cells(&self) -> Vec<u32> {
         self.cells.clone()
+    }
+
+    #[must_use]
+    #[wasm_bindgen(getter)]
+    pub fn mem_size(&self) -> usize {
+        self.mem_size
     }
 
     #[must_use]
@@ -64,7 +75,9 @@ pub fn execute(
     let buffer: Vec<u8> = Vec::new();
     let mut output = Cursor::new(buffer);
     let mut interp = Brainfuck::new(code)
-        .with_output_ref(&mut output);
+        .with_output_ref(&mut output)
+        .with_bench_execution(false)
+        .with_flush(false);
 
     if let Some(input) = input {
         interp = interp.with_input(
@@ -85,7 +98,7 @@ pub fn execute(
     }
 
     let ExecutionInfo {
-        cells, pointer, code_len, ..
+        cells, mem_size, pointer, code_len, ..
     } = interp.execute()
         .map_err(|err|
             JsError::new(format!("{err}").as_str())
@@ -100,6 +113,7 @@ pub fn execute(
     Ok(Output {
         output,
         cells,
+        mem_size,
         pointer,
         code_len,
         instructions,

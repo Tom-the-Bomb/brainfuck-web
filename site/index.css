@@ -283,6 +283,10 @@ main {
     gap: 0.8em;
 }
 
+#modal-body span {
+    margin-left: 0.5em;
+}
+
 #modal-body #cells {
     width: 100%;
     background-color: var(--modal-code-bg);

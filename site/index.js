@@ -34,16 +34,29 @@ function handler(editor, event) {
         parseVal(document.getElementById("inst-lim")),
     ];
 
-    let result;
-    let output;
-    let instructions;
+    let start, end;
+    let output, instructions, cells, pointer, code_len, mem_size;
     try {
-        result = execute(
+        start = performance.now();
+        let result = execute(
             code, input, maxCellValue, memorySize, instLimit,
         );
-        [output, instructions] = [result.output, result.instructions];
+        end = performance.now();
+
+        [output, instructions, cells, pointer, code_len, mem_size] = [
+            result.output,
+            result.instructions,
+            result.cells.join(", "),
+            result.pointer,
+            result.code_len,
+            result.mem_size,
+        ];
     } catch (err) {
-        [output, instructions] = [String(err), instLimit];
+        [output, instructions, cells, pointer, code_len, mem_size] = [
+            String(err),
+            instLimit,
+            "", 0, code.length, 0,
+        ];
     }
 
     const outputEl = document.getElementById("output-content");
@@ -56,16 +69,21 @@ function handler(editor, event) {
         instCounter.innerHTML = instructions;
     }
 
+    const time = document.getElementById("time");
+    if (time) {
+        time.innerHTML = String((end - start).toFixed(1));
+    }
+
     const modalBody = document.getElementById("modal-body");
     if (modalBody) {
         modalBody.innerHTML = `
             <div id="cells">
                 <div>Cells</div>
-                <pre><code>[${result.cells.join(', ')}]</code></pre>
+                <pre><code>[${cells}]</code></pre>
             </div>
-            <span>Pointer:&nbsp;&nbsp;<code>${result.pointer}</code></span>
-            <span>Code-length:&nbsp;&nbsp;<code>${result.code_len}</code></span>
-            `;
+            <span>Pointer:&nbsp;&nbsp;<code>${pointer}</code></span>
+            <span>Code-length:&nbsp;&nbsp;<code>${code_len}</code></span>
+            <span>Memory-size:&nbsp;&nbsp;<code>${mem_size}</code></span>`;
     }
 }
 
