@@ -20,6 +20,12 @@ jobs:
       - name: Install wasm-pack
         run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 
+      - name: Brainfuck commit hash
+        uses: mathiasvr/command-output@v1
+        id: brainfuck_commit
+        with:
+          run: git ls-remote https://github.com/Tom-the-Bomb/brainfuck-web HEAD | awk '{ print $1}'
+
       - name: Setup cache
         uses: Swatinem/rust-cache@v1
 
@@ -47,4 +53,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: build
-          commit_message: "Deploying..."
+          commit_message: "Deploy: Commit: ${{ steps.brainfuck_commit.outputs.stdout }} Repo Commit:""
