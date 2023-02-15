@@ -32,5 +32,4 @@ lol_alloc = { version = "0.3", optional = true }
 brainfuck-exe = { git = "https://github.com/Tom-the-Bomb/brainfuck-rs", default-features = false }
 
 [profile.release]
-opt-level = "s"
 lto = "fat"

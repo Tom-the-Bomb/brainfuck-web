@@ -52,9 +52,10 @@ function handler(editor, event) {
             result.mem_size,
         ];
     } catch (err) {
+        [start, end] = [0.0, 0.0];
         [output, instructions, cells, pointer, code_len, mem_size] = [
             String(err),
-            instLimit,
+            instLimit || 0,
             "", 0, code.length, 0,
         ];
     }
