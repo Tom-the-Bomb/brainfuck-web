@@ -30,7 +30,7 @@ jobs:
         run: wasm-pack build --out-dir build/pkg --target web --release
       
       - name: Copy files to build
-        run: cp site/* build
+        run: cp -r site/* build
       
       - name: List build dir
         run: ls build
