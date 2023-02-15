@@ -3,6 +3,7 @@ name: Publish
 on:
   push:
     branches: [ master ]
+
   workflow_dispatch:
 
 permissions:
@@ -10,52 +11,44 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Install latest nightly
         uses: actions-rs/toolchain@v1
         with:
-            toolchain: nightly
-            override: true
+          toolchain: nightly
+          override: true
 
       - name: Install wasm-pack
         run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 
-      - name: Brainfuck commit hash
-        uses: mathiasvr/command-output@v1
-        id: brainfuck_commit
-        with:
-          run: git ls-remote https://github.com/Tom-the-Bomb/brainfuck-web HEAD | awk '{ print $1}'
-
       - name: Setup cache
         uses: Swatinem/rust-cache@v1
 
-      - name: Create build folder
-        run: mkdir build
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
 
       - name: Build wasm
-        run: wasm-pack build --out-dir build/pkg --target web --release
-      
-      - name: Copy files to build
-        run: cp -r site/* build
-      
-      - name: List build dir
-        run: ls build
-      
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: brainfuck_web_wasm
-          path: build/brainfuck_web_bg.wasm
+        run: wasm-pack build --out-dir site/pkg --target web --release
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        if: ${{ github.ref == 'refs/heads/master' }}
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: build
-          commit_message: "Deploy: Commit: ${{ steps.brainfuck_commit.outputs.stdout }} Repo Commit:"
+          path: './site'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
