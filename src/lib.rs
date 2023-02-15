@@ -2,9 +2,10 @@ use std::io::Cursor;
 use wasm_bindgen::prelude::*;
 use brainfuck_exe::{Brainfuck, ExecutionInfo};
 
-#[cfg(feature = "wee_alloc")]
+#[cfg(feature = "lol_alloc")]
 #[global_allocator]
-static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
+static ALLOCATOR: lol_alloc::LockedAllocator<lol_alloc::FreeListAllocator> =
+    lol_alloc::LockedAllocator::new(lol_alloc::FreeListAllocator::new());
 
 /// output struct returned by the `execute` function
 /// providing relevant information for the execution result
