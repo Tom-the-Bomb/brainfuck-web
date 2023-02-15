@@ -1,0 +1,50 @@
+name: Publish
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install latest nightly
+        uses: actions-rs/toolchain@v1
+        with:
+            toolchain: nightly
+            override: true
+
+      - name: Install wasm-pack
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+
+      - name: Setup cache
+        uses: Swatinem/rust-cache@v1
+
+      - name: Create build folder
+        run: mkdir build
+
+      - name: Build wasm
+        run: wasm-pack build --out-dir build/pkg --target web --release
+      
+      - name: Copy files to build
+        run: cp site/* build
+      
+      - name: List build dir
+        run: ls build
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: brainfuck_web_wasm
+          path: build/brainfuck_web_bg.wasm
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/master' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build
+          commit_message: "Deploying..."
