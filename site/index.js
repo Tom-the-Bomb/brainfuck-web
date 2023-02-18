@@ -26,6 +26,11 @@ function parseVal(elem) {
 function handler(editor, event) {
     event.preventDefault();
 
+    const copy = document.getElementById("copy-output");
+    if (copy) {
+        copy.disabled = false;
+    }
+
     const code = editor.getValue();
     const [input, fallbackChar, maxCellValue, memorySize, instLimit] = [
         document.getElementById("input-stream")?.value,
@@ -59,6 +64,16 @@ function handler(editor, event) {
             instLimit || 0,
             "", 0, code.length, 0,
         ];
+    }
+
+    if (copy) {
+        copy.onclick = async () => {
+            const original = copy.innerHTML;
+
+            copy.innerHTML = `<div id="copied-msg" class="text-success">Copied!</div>`;
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            copy.innerHTML = original;
+        }
     }
 
     const outputEl = document.getElementById("output-content");

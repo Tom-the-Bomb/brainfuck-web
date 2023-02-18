@@ -221,13 +221,24 @@ main {
     filter: brightness(85%);
 }
 
-#output-header #view-cells {
+#output-header #left-btns {
     margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 0.7em;
+}
+
+#output-header .output-btns {
     padding: 0.5em;
 }
 
-#output-header #view-cells img {
+#output-header .output-btns img {
     width: 1.7em;
+}
+
+#output-header #copied-msg {
+    font-family: var(--text-font);
+    filter: brightness(120%);
 }
 
 #output {
