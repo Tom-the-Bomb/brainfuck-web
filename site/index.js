@@ -27,8 +27,9 @@ function handler(editor, event) {
     event.preventDefault();
 
     const code = editor.getValue();
-    const [input, maxCellValue, memorySize, instLimit] = [
+    const [input, fallbackChar, maxCellValue, memorySize, instLimit] = [
         document.getElementById("input-stream")?.value,
+        document.getElementById("fallback-input")?.value,
         parseVal(document.getElementById("max-cell-val")),
         parseVal(document.getElementById("mem-size")),
         parseVal(document.getElementById("inst-lim")),
@@ -39,7 +40,7 @@ function handler(editor, event) {
     try {
         start = performance.now();
         let result = execute(
-            code, input, maxCellValue, memorySize, instLimit,
+            code, input, maxCellValue, memorySize, fallbackChar, instLimit,
         );
         end = performance.now();
 
@@ -84,6 +85,7 @@ function handler(editor, event) {
             </div>
             <span>Pointer:&nbsp;&nbsp;<code>${pointer}</code></span>
             <span>Code-length:&nbsp;&nbsp;<code>${code_len}</code></span>
+            <span>Output-length:&nbsp;&nbsp;<code>${output.length}</code></span>
             <span>Memory-size:&nbsp;&nbsp;<code>${mem_size}</code></span>`;
     }
 }

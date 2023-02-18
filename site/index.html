@@ -28,31 +28,52 @@
             <form id="input">
                 <div id="editor">Enter code here</div>
                 <div id="options">
-                    <input id="input-stream"
-                        class="form-control"
-                        placeholder="Input chars"
-                        type="text"
-                        spellcheck="false"
-                        autocorrect="false"
-                        autocapitalize="false"
-                    >
+                    <div id="input-input">
+                        <input id="input-stream"
+                            class="form-control"
+                            placeholder="Input chars"
+                            type="text"
+                            spellcheck="false"
+                            autocorrect="false"
+                            autocapitalize="off"
+                            title="Input chars"
+                            data-bs-toggle="tooltip"
+                        >
+                        <input id="fallback-input"
+                            class="form-control"
+                            placeholder="EOF"
+                            type="text"
+                            maxlength="1"
+                            spellcheck="false"
+                            autocorrect="false"
+                            autocapitalize="off"
+                            title="End of input fallback"
+                            data-bs-toggle="tooltip"
+                        >
+                    </div>
                     <input id="max-cell-val"
                         class="form-control"
                         placeholder="Max cell value (default: u32::max)"
                         type="number"
                         min="0"
+                        title="Max cell value"
+                        data-bs-toggle="tooltip"
                     >
                     <input id="mem-size"
                         class="form-control"
                         placeholder="Memory array size (default: ∞)"
                         type="number"
                         min="0"
+                        title="Memory size"
+                        data-bs-toggle="tooltip"
                     >
                     <input id="inst-lim"
                         class="form-control"
                         placeholder="Instructions limit (default: ∞)"
                         type="number"
                         min="0"
+                        title="Instructions limit"
+                        data-bs-toggle="tooltip"
                     >
                     <button
                         type="button"

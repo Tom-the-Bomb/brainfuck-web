@@ -10,8 +10,8 @@ checksum = "d468802bab17cbc0cc575e9b053f41e72aa36bfa6b7f55e3529ffa43161b97fa"
 
 [[package]]
 name = "brainfuck-exe"
-version = "0.2.3"
-source = "git+https://github.com/Tom-the-Bomb/brainfuck-rs#8b5465876e37cfbf653588afddde2bb8b5f99579"
+version = "0.2.4"
+source = "git+https://github.com/Tom-the-Bomb/brainfuck-rs#4546464d6eb74170b2e8f6175a8d4232e294c477"
 
 [[package]]
 name = "brainfuck-web"

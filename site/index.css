@@ -155,6 +155,24 @@ main {
     color: var(--placeholder-color);
 }
 
+#input-input #input-stream {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+#input-input #fallback-input {
+    width: 4em;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+#options #input-input {
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+    width: 100%;
+}
+
 #options input[type=number] {
     width: 50%;
 }

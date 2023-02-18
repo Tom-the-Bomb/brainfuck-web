@@ -71,6 +71,7 @@ pub fn execute(
     input: Option<String>,
     max_cell_value: Option<u32>,
     memory_size: Option<usize>,
+    fallback_char: Option<char>,
     instructions_limit: Option<usize>,
 ) -> Result<Output, JsError> {
     let buffer: Vec<u8> = Vec::new();
@@ -78,13 +79,15 @@ pub fn execute(
     let mut interp = Brainfuck::new(code)
         .with_output_ref(&mut output)
         .with_bench_execution(false)
-        .with_flush(false);
-
-    if let Some(input) = input {
-        interp = interp.with_input(
-            Cursor::new(input.into_bytes())
+        .with_flush(false)
+        .with_input(
+            Cursor::new(
+                input.map_or_else(
+                    Vec::<u8>::new,
+                    String::into_bytes,
+                )
+            )
         );
-    }
 
     if let Some(val) = max_cell_value {
         interp = interp.with_max_value(val);
@@ -96,6 +99,10 @@ pub fn execute(
 
     if let Some(limit) = instructions_limit {
         interp = interp.with_instructions_limit(limit);
+    }
+
+    if let Some(chr) = fallback_char {
+        interp = interp.with_fallback_input(chr);
     }
 
     let ExecutionInfo {
