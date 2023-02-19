@@ -42,7 +42,7 @@ jobs:
         uses: actions/configure-pages@v3
 
       - name: Build wasm
-        run: wasm-pack build --out-dir site/pkg --target web --release
+        run: wasm-pack build --no-default-features --out-dir site/pkg --target web --release
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1

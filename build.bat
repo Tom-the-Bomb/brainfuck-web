@@ -1,1 +1,1 @@
-wasm-pack build --release --target web --out-dir site/pkg
+wasm-pack build --no-default-features --release --target web --out-dir site/pkg
