@@ -68,7 +68,7 @@ function handler(editor, event) {
     }
 
     if (copy) {
-        copy.onclick = async () => {
+        copy.addEventListener("click", async () => {
             const original = copy.innerHTML;
             navigator.clipboard.writeText(output);
 
@@ -76,7 +76,7 @@ function handler(editor, event) {
                 `<div id="copied-msg" class="text-success">Copied!</div>`;
             await new Promise(resolve => setTimeout(resolve, 1500));
             copy.innerHTML = original;
-        }
+        });
     }
 
     const outputEl = document.getElementById("output-content");
