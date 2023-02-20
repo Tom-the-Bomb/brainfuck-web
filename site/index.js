@@ -41,7 +41,7 @@ function handler(editor, event) {
     ];
 
     let start, end;
-    let output, instructions, cells, pointer, code_len, mem_size;
+    let output, instructions, cells, pointer, code_len, mem_size, length;
     try {
         start = performance.now();
         let result = execute(
@@ -49,28 +49,31 @@ function handler(editor, event) {
         );
         end = performance.now();
 
-        [output, instructions, cells, pointer, code_len, mem_size] = [
+        [output, instructions, cells, pointer, code_len, mem_size, length] = [
             result.output,
             result.instructions,
             result.cells.join(", "),
             result.pointer,
             result.code_len,
             result.mem_size,
+            result.output.length,
         ];
     } catch (err) {
         [start, end] = [0.0, 0.0];
-        [output, instructions, cells, pointer, code_len, mem_size] = [
+        [output, instructions, cells, pointer, code_len, mem_size, length] = [
             String(err),
             instLimit || 0,
-            "", 0, code.length, 0,
+            "", 0, code.length, 0, 0,
         ];
     }
 
     if (copy) {
         copy.onclick = async () => {
             const original = copy.innerHTML;
+            navigator.clipboard.writeText(output);
 
-            copy.innerHTML = `<div id="copied-msg" class="text-success">Copied!</div>`;
+            copy.innerHTML =
+                `<div id="copied-msg" class="text-success">Copied!</div>`;
             await new Promise(resolve => setTimeout(resolve, 1500));
             copy.innerHTML = original;
         }
@@ -100,7 +103,7 @@ function handler(editor, event) {
             </div>
             <span>Pointer:&nbsp;&nbsp;<code>${pointer}</code></span>
             <span>Code-length:&nbsp;&nbsp;<code>${code_len}</code></span>
-            <span>Output-length:&nbsp;&nbsp;<code>${output.length}</code></span>
+            <span>Output-length:&nbsp;&nbsp;<code>${length}</code></span>
             <span>Memory-size:&nbsp;&nbsp;<code>${mem_size}</code></span>`;
     }
 }
